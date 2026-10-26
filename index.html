@@ -119,6 +119,10 @@ nav .btn{min-height:42px;padding:0 18px;font-size:15px}
 }
 
 /* feature blocks */
+.inv.hist td b{display:block;font-weight:600;font-size:15px}
+.inv.hist td small{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.inv.hist .exp{color:var(--ink-soft)}
+.inv.hist td{vertical-align:middle}
 .feature.wide .wrap{grid-template-columns:minmax(0,1fr);gap:40px}
 .feature.wide .copy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 64px;align-items:start}
 .feature.wide .copy .kicker{grid-column:1;grid-row:1}
@@ -420,15 +424,20 @@ footer .brand span{font-size:22px}
         </div>
         <figure class="panel rise" style="margin:0">
           <div class="ui">
-            <div class="ui-top"><b>Flight history</b><span>all pens</span></div>
-            <ul class="flights">
-              <li><span class="thumb" aria-hidden="true"></span><div><b>Morning count</b><small>today · 06:12 · 60 pens</small></div><span class="tot">5,014</span></li>
-              <li><span class="thumb" aria-hidden="true"></span><div><b>Morning count</b><small>yesterday · 06:08 · 60 pens</small></div><span class="tot">5,016</span></li>
-              <li><span class="thumb" aria-hidden="true"></span><div><b>After intake</b><small>2 days ago · 15:40 · 60 pens</small></div><span class="tot">5,016</span></li>
-              <li><span class="thumb" aria-hidden="true"></span><div><b>Morning count</b><small>3 days ago · 06:15 · 60 pens</small></div><span class="tot">4,880</span></li>
-            </ul>
+            <div class="ui-top"><b>Flights</b><span>count / expected</span></div>
+            <table class="inv hist">
+              <thead><tr><th>Flight</th><th class="n">Count</th><th class="n">Difference</th></tr></thead>
+              <tbody>
+                <tr><td><b>Flight 8</b><small>Oct 16, 2026</small></td><td class="n">3,355 <span class="exp">/ 3,374</span></td><td class="n"><span class="chip ok">-19 · -0.6%</span></td></tr>
+                <tr><td><b>Flight 6</b><small>Sep 10, 2026</small></td><td class="n">2,932 <span class="exp">/ 2,951</span></td><td class="n"><span class="chip ok">-19 · -0.6%</span></td></tr>
+                <tr><td><b>Flight 5</b><small>Sep 10, 2026</small></td><td class="n">687 <span class="exp">/ 682</span></td><td class="n"><span class="chip ok">+5 · +0.7%</span></td></tr>
+                <tr><td><b>Flight 4</b><small>Sep 1, 2026</small></td><td class="n">1,508 <span class="exp">/ 1,513</span></td><td class="n"><span class="chip ok">-5 · -0.3%</span></td></tr>
+                <tr><td><b>Flight 3</b><small>Sep 1, 2026</small></td><td class="n">1,512 <span class="exp">/ 1,513</span></td><td class="n"><span class="chip ok">-1 · -0.1%</span></td></tr>
+                <tr><td><b>Flight 1</b><small>Aug 28, 2026</small></td><td class="n">1,694 <span class="exp">/ 1,683</span></td><td class="n"><span class="chip ok">+11 · +0.7%</span></td></tr>
+              </tbody>
+            </table>
           </div>
-          <figcaption class="cap">ILLUSTRATIVE DATA · FLIGHT HISTORY WITH VIDEO PER PEN</figcaption>
+          <figcaption class="cap">REAL FLIGHTS FROM OUR PILOT FEEDLOT · STANDARD COUNTING RUNS</figcaption>
         </figure>
       </div>
     </section>
