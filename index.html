@@ -268,6 +268,45 @@ footer .brand span{font-size:22px}
   .statement .wrap{padding-block:80px 64px}
   .process .wrap,.compare .wrap,.next .wrap{padding-block:76px}
 }
+
+/* demo steps */
+.demo{list-style:none;counter-reset:d;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;max-width:46ch}
+.demo li{counter-increment:d;display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;color:var(--deep-soft);font-size:16px;line-height:1.5}
+.demo li::before{content:counter(d);width:28px;height:28px;border-radius:50%;border:1.5px solid #E6B474;color:#E6B474;font-family:var(--mono);font-size:12.5px;display:flex;align-items:center;justify-content:center}
+.demo b{color:#F6F1E7;font-weight:600}
+
+/* savings calculator */
+.savings .wrap{padding-block:104px}
+.savings h2{font-size:clamp(32px,4vw,52px);line-height:1.05;margin-top:14px;max-width:20ch}
+.savings .intro{margin-top:18px;color:var(--ink-soft);max-width:56ch}
+.calc{margin-top:40px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--card)}
+.calc-in{padding:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px;align-content:start}
+.c{justify-content:flex-end}
+.calc-in{align-items:end}
+.c{display:flex;flex-direction:column;gap:7px;min-width:0}
+.c span{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.c input{font:500 18px/1.3 var(--body);color:var(--ink);background:var(--ground);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;min-height:50px;font-variant-numeric:tabular-nums}
+.c input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent)}
+.c input::placeholder{color:color-mix(in srgb, var(--ink-soft) 70%, transparent);font-weight:400}
+.pre{position:relative}
+.pre i{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-style:normal;font-weight:600;color:var(--ink-soft)}
+.pre input{padding-left:32px}
+.calc-out{background:var(--deep);color:var(--deep-ink);padding:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.o{display:flex;flex-direction:column;gap:6px;border-top:1px solid rgba(243,238,228,.18);padding-top:14px;min-width:0}
+.ol{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--deep-soft)}
+.o b{font-family:var(--display);font-weight:700;font-size:clamp(28px,3vw,38px);letter-spacing:-.02em;line-height:1.05;color:#F6F1E7;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ou{font-size:14.5px;color:var(--deep-soft)}
+.calc-note{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+@media (max-width: 900px){.calc{grid-template-columns:1fr}}
+@media (max-width: 640px){
+  .savings .wrap{padding-block:64px}
+  .calc{margin-top:28px;border-radius:20px}
+  .calc-in{padding:18px;gap:14px 12px}
+  .calc-out{padding:20px;gap:18px}
+  .c input{font-size:16px}
+}
+@media (max-width: 400px){.calc-out{grid-template-columns:1fr}}
+
 /* ---------- phone layout ---------- */
 .shot-scroll{border-radius:14px}
 .swipe-hint{display:none}
@@ -353,7 +392,7 @@ footer .brand span{font-size:22px}
     <nav aria-label="Sections">
       <a href="#product">Product</a>
       <a href="#how">How it works</a>
-      <a href="#next">Roadmap</a>
+      <a href="#savings">Savings</a>
       <a class="btn light" href="#contact">Book a demo</a>
     </nav>
   </div>
@@ -523,7 +562,7 @@ footer .brand span{font-size:22px}
       <h2 id="how-h" class="rise">One tap. The drone does the rest.</h2>
       <div class="track" id="track">
         <div class="fill" aria-hidden="true"></div>
-        <div class="step rise"><span class="dot">01</span><h4>Tap the flight plan</h4><p>Your pens are mapped once. Starting a count after that is one tap. No pilot needed.</p></div>
+        <div class="step rise"><span class="dot">01</span><h4>Tap the flight plan</h4><p>Your pens are mapped once. Starting a count after that is one tap. No pilot skills needed.</p></div>
         <div class="step rise"><span class="dot">02</span><h4>It flies itself</h4><p>The drone takes off, flies a straight pass down every pen with the camera pointed straight down, and lands where it started.</p></div>
         <div class="step rise"><span class="dot">03</span><h4>AI counts every animal</h4><p>The footage uploads and our model counts each animal and assigns it to the pen it stands in.</p></div>
         <div class="step rise"><span class="dot">04</span><h4>Review with proof</h4><p>Per-pen inventory against expected counts, cattle positions on your satellite map, and video of each pen.</p></div>
@@ -540,7 +579,7 @@ footer .brand span{font-size:22px}
           <thead><tr><th scope="col">Measure</th><th scope="col" class="us">Heelr</th><th scope="col">Manual count</th></tr></thead>
           <tbody>
             <tr><td>5,000 head</td><td class="us" data-label="Heelr">Under 1 hour</td><td class="them" data-label="Manual count">A full day</td></tr>
-            <tr><td>People needed</td><td class="us" data-label="Heelr">None. Tap start and it flies itself</td><td class="them" data-label="Manual count">4 people</td></tr>
+            <tr><td>People needed</td><td class="us" data-label="Heelr">One person taps start. No pilot skills needed</td><td class="them" data-label="Manual count">4 people</td></tr>
             <tr><td>Entering pens</td><td class="us" data-label="Heelr">Never</td><td class="them" data-label="Manual count">Every pen</td></tr>
             <tr><td>Accuracy</td><td class="us" data-label="Heelr">Within 1 head per pen on average</td><td class="them" data-label="Manual count">Varies with crew and conditions</td></tr>
             <tr><td>Evidence</td><td class="us" data-label="Heelr">Video of every pen, kept for every flight</td><td class="them" data-label="Manual count">A tally sheet</td></tr>
@@ -551,27 +590,52 @@ footer .brand span{font-size:22px}
     </div>
   </section>
 
+  <section class="savings" id="savings" aria-labelledby="sav-h">
+    <div class="wrap">
+      <p class="kicker rise">What counting costs you</p>
+      <h2 id="sav-h" class="rise">Put your own numbers in.</h2>
+      <p class="intro rise">See how much time your team spends counting by hand, and what a miscount is worth at your prices.</p>
+      <div class="calc rise">
+        <form class="calc-in" id="calc" novalidate>
+          <label class="c" for="c-head"><span>Head on feed</span><input id="c-head" type="number" inputmode="numeric" min="0" step="1" value="5000"></label>
+          <label class="c" for="c-value"><span>Value per head</span><div class="pre"><i>R</i><input id="c-value" type="number" inputmode="numeric" min="0" step="100" placeholder="your price"></div></label>
+          <label class="c" for="c-counts"><span>Hand counts per month</span><input id="c-counts" type="number" inputmode="numeric" min="0" step="1" value="1"></label>
+          <label class="c" for="c-people"><span>People per count</span><input id="c-people" type="number" inputmode="numeric" min="0" step="1" value="4"></label>
+          <label class="c" for="c-days"><span>Days per count</span><input id="c-days" type="number" inputmode="decimal" min="0" step="0.5" value="1"></label>
+          <label class="c" for="c-wage"><span>Daily cost per worker</span><div class="pre"><i>R</i><input id="c-wage" type="number" inputmode="numeric" min="0" step="10" placeholder="your rate"></div></label>
+        </form>
+        <div class="calc-out" aria-live="polite">
+          <div class="o"><span class="ol">Time spent counting by hand</span><b id="o-days">48</b><span class="ou">person-days a year</span></div>
+          <div class="o"><span class="ol">Labour cost of counting</span><b id="o-labour">R —</b><span class="ou" id="o-labour-u">a year · add your daily cost</span></div>
+          <div class="o"><span class="ol">One missing animal</span><b id="o-one">R —</b><span class="ou" id="o-one-u">add your value per head</span></div>
+          <div class="o"><span class="ol">A 1% miscount</span><b id="o-pct">50 head</b><span class="ou" id="o-pct-u">add your value per head</span></div>
+        </div>
+      </div>
+      <p class="calc-note rise">Uses only the numbers you enter. Nothing is sent or saved.</p>
+    </div>
+  </section>
+
   <section class="next" id="next" aria-labelledby="next-h">
     <div class="wrap">
-      <p class="kicker rise">Coming next</p>
+      <p class="kicker rise">In development</p>
       <h2 id="next-h" class="rise">From the air to the ground.</h2>
-      <p class="intro rise">The drone gives you the whole feedlot in one flight. Next, RFID monitoring at the points every animal passes through, in the same dashboard.</p>
+      <p class="intro rise">Counting never needs a tag. For feedlots that already tag their cattle, we’re building RFID readers at water points, feed bunks and loading docks, in the same dashboard.</p>
       <div class="road">
         <article class="rise">
           <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M6 24h32v8a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6z" fill="none" stroke="currentColor" stroke-width="2"></path><path d="M10 28c3-2 6 2 9 0s6 2 9 0 6 2 6 0" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"></path><path d="M22 6v10M17 11l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          <span class="tag">Coming next</span>
+          <span class="tag">In development</span>
           <h4>Water points</h4>
           <p>RFID readers at the troughs record which animals come to drink.</p>
         </article>
         <article class="rise">
           <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 22h36l-4 14H8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M10 22c2-5 6-7 12-7s10 2 12 7" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"></path></svg>
-          <span class="tag">Coming next</span>
+          <span class="tag">In development</span>
           <h4>Feed bunks</h4>
           <p>RFID at the bunk adds individual feeding activity to the pen-level view from the air.</p>
         </article>
         <article class="rise">
           <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 36h12l20-22h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 36V26M24 27V18M32 18v-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M30 34h8M34 30v8" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"></path></svg>
-          <span class="tag">Coming next</span>
+          <span class="tag">In development</span>
           <h4>Loading docks</h4>
           <p>Every animal read in and out at loading, so arrivals and dispatches match the count.</p>
         </article>
@@ -587,6 +651,11 @@ footer .brand span{font-size:22px}
           <p class="kicker" style="color:#E6B474">Get in touch</p>
           <h2 id="contact-h" style="margin-top:16px">Count your feedlot from the air.</h2>
           <p>Heelr is built by farmers, for farmers. Feedlot managers: we'll fly a demo count on your pens.</p>
+          <ol class="demo">
+            <li><span><b>We map your pens.</b> We come out and set up a flight plan for your feedlot.</span></li>
+            <li><span><b>We fly a count with you watching.</b> One tap, and the drone covers every pen.</span></li>
+            <li><span><b>You check our numbers.</b> Compare the count per pen against your own book.</span></li>
+          </ol>
         </div>
         <form class="form" id="contact-form" novalidate>
           <div class="two">
@@ -723,6 +792,28 @@ footer .brand span{font-size:22px}
   var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){build(); if(reduce)frame(0)},150)});
   build(); requestAnimationFrame(frame);
 
+
+
+  /* ---------- Savings calculator: only uses what the visitor types ---------- */
+  (function(){
+    var $=function(id){return document.getElementById(id)};
+    var R=function(n){return 'R '+Math.round(n).toLocaleString('en-ZA')};
+    var N=function(n){return Math.round(n).toLocaleString('en-ZA')};
+    function num(id){var v=parseFloat($(id).value);return isFinite(v)&&v>=0?v:null}
+    function run(){
+      var head=num('c-head'),val=num('c-value'),cnt=num('c-counts'),ppl=num('c-people'),days=num('c-days'),wage=num('c-wage');
+      var pd=(cnt||0)*12*(ppl||0)*(days||0);
+      $('o-days').textContent=N(pd);
+      if(wage){$('o-labour').textContent=R(pd*wage);$('o-labour-u').textContent='a year';}
+      else{$('o-labour').textContent='R —';$('o-labour-u').textContent='a year · add your daily cost';}
+      var onePct=(head||0)*0.01;
+      $('o-pct').textContent=N(onePct)+' head';
+      if(val){$('o-one').textContent=R(val);$('o-one-u').textContent='at your value per head';
+        $('o-pct-u').textContent='worth '+R(onePct*val)+' at your price';}
+      else{$('o-one').textContent='R —';$('o-one-u').textContent='add your value per head';$('o-pct-u').textContent='add your value per head';}
+    }
+    var f=$('calc'); f.addEventListener('input',run); f.addEventListener('submit',function(e){e.preventDefault()}); run();
+  })();
 
   /* ---------- Compare sliders ---------- */
   [].forEach.call(document.querySelectorAll('.cmp'),function(c){
