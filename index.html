@@ -49,7 +49,7 @@ a{color:var(--accent-ink)}
 .btn.dark:hover{background:var(--accent);color:#1F2A24}
 
 /* header over hero */
-header{position:absolute;inset:0 0 auto;z-index:5}
+header{position:absolute;inset:0 0 auto;z-index:5;background:linear-gradient(180deg, rgba(20,18,15,.55) 0%, rgba(20,18,15,0) 100%)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#F3EEE4}
 .brand span{font-family:var(--logo);font-weight:800;font-size:27px;letter-spacing:-.03em;line-height:1}
@@ -239,6 +239,7 @@ footer .wrap{padding-block:36px 40px;display:flex;justify-content:space-between;
 footer .brand{color:var(--ink)}
 footer .brand span{font-size:22px}
 
+
 /* motion: content is visible at rest; JS adds a gentle rise when it enters view */
 .rise{transition:transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s ease}
 .js .rise.pre{transform:translateY(18px);opacity:.001}
@@ -267,6 +268,74 @@ footer .brand span{font-size:22px}
   .statement .wrap{padding-block:80px 64px}
   .process .wrap,.compare .wrap,.next .wrap{padding-block:76px}
 }
+/* ---------- phone layout ---------- */
+.shot-scroll{border-radius:14px}
+.swipe-hint{display:none}
+@media (max-width: 640px){
+  body{font-size:17px}
+  header .wrap{padding-block:14px}
+  .brand span{font-size:24px}
+  nav .btn{min-height:40px;padding:0 16px;font-size:14.5px}
+  .hero{min-height:auto}
+  .hero .wrap{padding-block:200px 40px}
+  .hero h1{font-size:clamp(40px,12vw,52px)}
+  .hero .cta-row .btn{flex:1 1 100%;justify-content:center}
+  .hud{top:calc(76px + env(safe-area-inset-top, 0px));gap:6px}
+  .hud .row{font-size:10.5px;padding:5px 8px}
+  .hud .count{padding:8px 12px}
+  .hud .count b{font-size:28px}
+  .hud .count span{font-size:9.5px}
+  .hero .note{display:none}
+
+  .statement .wrap{padding-block:64px 48px}
+  .stats{gap:28px;margin-top:40px}
+  .stat .num{font-size:52px}
+
+  .show-head{margin-bottom:18px;gap:12px}
+  .cmp{border-radius:18px}
+  .cmp .ring{border-radius:18px}
+  .cmp.dash{aspect-ratio:570/470}
+  .cmp-hint{flex-direction:column;gap:2px}
+
+  .feature .wrap{padding-block:40px;gap:24px}
+  .panel{border-radius:20px;padding:12px}
+  .panel .cap{padding:0 4px}
+  .shot-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .shot-scroll .shot{width:760px;max-width:none}
+  .swipe-hint{display:block;margin-top:8px;padding:0 4px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft)}
+
+  .inv.hist th,.inv.hist td{padding:10px 12px}
+  .inv.hist td b{white-space:nowrap}
+  .inv.hist .exp{display:block;font-size:12px}
+  .inv.hist td.n{white-space:nowrap}
+  .inv.hist .chip{font-size:10.5px;padding:2px 7px}
+  .ui-top{padding:12px 14px}
+
+  .process .wrap,.compare .wrap,.next .wrap{padding-block:64px}
+  .track{margin-top:36px;row-gap:32px}
+
+  /* comparison table becomes one card per row */
+  .vs{overflow:visible;margin-top:32px}
+  .vs table,.vs tbody,.vs tr,.vs td{display:block;min-width:0;width:auto}
+  .vs thead{display:none}
+  .vs tr{border:1px solid var(--line);border-radius:16px;margin-bottom:12px;overflow:hidden;background:var(--ground)}
+  .vs td{border:0;padding:12px 16px}
+  .vs td:first-child{width:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-bottom:4px}
+  .vs td.us,.vs td.them{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:baseline;font-size:16px}
+  .vs td.us{background:color-mix(in srgb, var(--accent) 9%, transparent)}
+  .vs td.us::before,.vs td.them::before{content:attr(data-label);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+  .vs td.us::before{color:var(--accent-ink)}
+  .vs td.them::before{color:var(--ink-soft)}
+
+  .road{gap:14px;margin-top:32px}
+  .road article{padding:22px}
+  .closing .card{border-radius:24px;padding:28px 22px;gap:28px}
+  .closing .mark{width:200px;height:200px;right:-50px;top:-40px}
+  .f input,.f textarea{font-size:16px}
+  .send .btn{flex:1 1 100%;justify-content:center}
+  footer .wrap{flex-direction:column;gap:10px;padding-block:28px 32px}
+}
+
 </style>
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -342,8 +411,8 @@ footer .brand span{font-size:22px}
           <p class="rise">Every pen shows its count against your books, green for a match and red where it's off. Turn on cattle positions and you see each animal exactly where it stood during the flight.</p>
         </div>
         <div class="cmp dash rise">
-          <img src="assets/dash-cattle.webp" alt="Heelr dashboard with every counted animal plotted as a dot on the feedlot map" loading="lazy">
-          <img class="before" src="assets/dash-counts.webp" alt="Heelr dashboard showing per-pen counts against expected headcount on a feedlot map" loading="lazy">
+          <picture><source media="(max-width: 640px)" srcset="assets/dash-cattle-m.webp"><img src="assets/dash-cattle.webp" alt="Heelr dashboard with every counted animal plotted as a dot on the feedlot map" loading="lazy"></picture>
+          <picture><source media="(max-width: 640px)" srcset="assets/dash-counts-m.webp"><img class="before" src="assets/dash-counts.webp" alt="Heelr dashboard showing per-pen counts against expected headcount on a feedlot map" loading="lazy"></picture>
           <svg class="seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="55" y1="0" x2="45" y2="100" stroke="#D08A3A" stroke-width="4" vector-effect="non-scaling-stroke"></line></svg>
           <span class="lab l">Per-pen counts</span>
           <span class="lab r">Every animal located</span>
@@ -387,7 +456,8 @@ footer .brand span{font-size:22px}
           </ul>
         </div>
         <figure class="panel rise" style="margin:0">
-          <img class="shot" src="assets/inventory-table.webp" alt="Heelr results table: count, expected, difference, share of cattle at the bunk, middle and far third, and a quality flag for each pen" loading="lazy" width="1643" height="545">
+          <div class="shot-scroll"><img class="shot" src="assets/inventory-table.webp" alt="Heelr results table: count, expected, difference, share of cattle at the bunk, middle and far third, and a quality flag for each pen" loading="lazy" width="1643" height="545"></div>
+          <p class="swipe-hint" aria-hidden="true">Swipe to see the full table →</p>
           <figcaption class="cap">FROM THE HEELR DASHBOARD · COUNT VS EXPECTED PER PEN</figcaption>
         </figure>
       </div>
@@ -469,12 +539,12 @@ footer .brand span{font-size:22px}
         <table>
           <thead><tr><th scope="col">Measure</th><th scope="col" class="us">Heelr</th><th scope="col">Manual count</th></tr></thead>
           <tbody>
-            <tr><td>5,000 head</td><td class="us">Under 1 hour</td><td class="them">A full day</td></tr>
-            <tr><td>People needed</td><td class="us">None. Tap start and it flies itself</td><td class="them">4 people</td></tr>
-            <tr><td>Entering pens</td><td class="us">Never</td><td class="them">Every pen</td></tr>
-            <tr><td>Accuracy</td><td class="us">Within 1 head per pen on average</td><td class="them">Varies with crew and conditions</td></tr>
-            <tr><td>Evidence</td><td class="us">Video of every pen, kept for every flight</td><td class="them">A tally sheet</td></tr>
-            <tr><td>Bunk insight</td><td class="us">Share of cattle at the bunk, middle and back</td><td class="them">A walk-past impression</td></tr>
+            <tr><td>5,000 head</td><td class="us" data-label="Heelr">Under 1 hour</td><td class="them" data-label="Manual count">A full day</td></tr>
+            <tr><td>People needed</td><td class="us" data-label="Heelr">None. Tap start and it flies itself</td><td class="them" data-label="Manual count">4 people</td></tr>
+            <tr><td>Entering pens</td><td class="us" data-label="Heelr">Never</td><td class="them" data-label="Manual count">Every pen</td></tr>
+            <tr><td>Accuracy</td><td class="us" data-label="Heelr">Within 1 head per pen on average</td><td class="them" data-label="Manual count">Varies with crew and conditions</td></tr>
+            <tr><td>Evidence</td><td class="us" data-label="Heelr">Video of every pen, kept for every flight</td><td class="them" data-label="Manual count">A tally sheet</td></tr>
+            <tr><td>Bunk insight</td><td class="us" data-label="Heelr">Share of cattle at the bunk, middle and back</td><td class="them" data-label="Manual count">A walk-past impression</td></tr>
           </tbody>
         </table>
       </div>
