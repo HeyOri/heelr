@@ -102,6 +102,8 @@ nav .btn{min-height:42px;padding:0 18px;font-size:15px}
 .stat .num{font-family:var(--display);font-weight:700;font-size:clamp(48px,5.6vw,76px);letter-spacing:-.04em;line-height:.95;font-variant-numeric:tabular-nums}
 .stat .num small{font-size:.36em;letter-spacing:-.01em;font-weight:600;margin-left:6px}
 .stat p{color:var(--ink-soft);max-width:28ch;font-size:17px}
+.stat .fn{font-size:.7em;vertical-align:super;margin-left:2px;color:var(--accent-ink)}
+.statement .footnote{margin-top:28px;font-size:13px;color:var(--ink-soft)}
 .stat .src{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
 
 
@@ -497,14 +499,15 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
           <p>Counted in under an hour, from take-off to per-pen numbers and video.</p>
         </div>
         <div class="stat rise">
-          <span class="num">&gt;<span data-count="99">99</span>%<small>accurate</small></span>
-          <p>Within 1 head per pen on average.</p>
+          <span class="num">&gt;<span data-count="99">99</span>%<small>accurate<sup class="fn">*</sup></small></span>
+          <p>Within 1 head per pen on average, and the AI keeps learning from every flight.</p>
         </div>
         <div class="stat rise">
           <span class="num"><span data-count="0">0</span><small>people in the pens</small></span>
           <p>The same count by hand takes 4 people a full day, on foot among the cattle.</p>
         </div>
       </div>
+      <p class="footnote rise">* Heelr count compared with the farm's inventory on our pilot feedlot.</p>
     </div>
   </section>
 
