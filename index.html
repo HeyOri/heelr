@@ -5,10 +5,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1F2A24">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Heelr">
-<meta property="og:description" content="Aerial cattle counting for feedlots. No tags, no pen entry, no guesswork.">
-<title>Heelr</title>
-<meta name="description" content="Aerial cattle counting for feedlots. No tags, no pen entry, no guesswork.">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Heelr · Drone cattle counting for feedlots</title>
+<meta name="description" content="Autonomous drone cattle counts for feedlots. Over 99% accurate, 5,000 head in under an hour, with per-pen counts and video. No RFID tags, no pen entry.">
+<link rel="canonical" href="https://heelrhq.co.za/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Heelr">
+<meta property="og:url" content="https://heelrhq.co.za/">
+<meta property="og:title" content="Heelr · Every head. Every pen. Every flight.">
+<meta property="og:description" content="Autonomous drone cattle counts for feedlots. Over 99% accurate, no RFID tags, no pen entry.">
+<meta property="og:image" content="https://heelrhq.co.za/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Heelr: Every head. Every pen. Every flight. Drone view of cattle in a feedlot pen.">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Heelr · Every head. Every pen. Every flight.">
+<meta name="twitter:description" content="Autonomous drone cattle counts for feedlots. Over 99% accurate, no RFID tags, no pen entry.">
+<meta name="twitter:image" content="https://heelrhq.co.za/assets/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Heelr","url":"https://heelrhq.co.za/","logo":"https://heelrhq.co.za/apple-touch-icon.png","description":"Autonomous drone cattle counting for feedlots.","areaServed":"ZA"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@800&display=swap">
@@ -448,9 +463,12 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
 
 <main id="top">
   <section class="hero" aria-labelledby="hero-h">
-    <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
+    <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.webp" aria-hidden="true">
+      <source media="(max-width: 480px)" src="assets/video/hero-m.mp4" type="video/mp4">
       <source src="assets/video/hero.mp4" type="video/mp4">
     </video>
+    <script>/* data saver or a very slow connection: keep the still frame, skip the video */
+    (function(){var c=navigator.connection,v=document.getElementById('hero-video');if(c&&(c.saveData||/(^|-)2g$/.test(c.effectiveType||''))){v.removeAttribute('autoplay');v.preload='none';[].slice.call(v.querySelectorAll('source')).forEach(function(x){x.remove()});v.load();}})();</script>
     <div class="scrim" aria-hidden="true"></div>
     <div class="hud" aria-hidden="true">
       <div class="row"><i class="rec"></i><span id="hero-stage">RAW DRONE FOOTAGE</span></div>
@@ -509,9 +527,9 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
           </div>
         </div>
         <div class="screen" id="screen">
-          <video data-view="raw" muted loop playsinline preload="none" poster="assets/video/pen-c30-poster.jpg" aria-label="Raw drone footage looking straight down over a feedlot pen"></video>
-          <video data-view="ai" class="on" muted loop playsinline preload="none" poster="assets/video/pen-c30-poster.jpg" aria-label="AI view: every animal outlined and tracked, fences marked"></video>
-          <video data-view="count" muted loop playsinline preload="none" poster="assets/video/pen-c30-poster.jpg" aria-label="Dashboard video: every animal numbered with a running count"></video>
+          <video data-view="raw" muted loop playsinline preload="none" aria-label="Raw drone footage looking straight down over a feedlot pen"></video>
+          <video data-view="ai" class="on" muted loop playsinline preload="none" poster="assets/video/pen-c30-poster.webp" aria-label="AI view: every animal outlined and tracked, fences marked"></video>
+          <video data-view="count" muted loop playsinline preload="none" aria-label="Dashboard video: every animal numbered with a running count"></video>
           <div class="final"><span>Final count</span><b id="final">118 head</b></div>
         </div>
         <p class="explain" id="explain" aria-live="polite">The model outlines every animal, finds the fences on both sides of the pen, and tracks each animal by ID so none is counted twice.</p>
@@ -863,7 +881,7 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
     var pen='c30', view='ai', started=false;
     function lead(){return vids.filter(function(v){return v.dataset.view===view})[0]}
     function load(){
-      vids.forEach(function(v){v.poster='assets/video/pen-'+pen+'-poster.jpg'; v.src='assets/video/pen-'+pen+'-'+v.dataset.view+'.mp4'; v.load();});
+      vids.forEach(function(v){v.poster='assets/video/pen-'+pen+'-poster.webp'; v.src='assets/video/pen-'+pen+'-'+v.dataset.view+'.mp4'; v.load();});
       finalEl.textContent=counts[pen];
       if(started&&!reduce) vids.forEach(function(v){var p=v.play(); if(p&&p.catch)p.catch(function(){})});
     }
@@ -888,6 +906,8 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
         else vids.forEach(function(v){v.pause()});
       })},{threshold:.25});
       io.observe(player);
+      var pre=new IntersectionObserver(function(es){if(es[0].isIntersecting){start();pre.disconnect()}},{rootMargin:'400px 0px'});
+      pre.observe(player);
     } else start();
     // with reduced motion, play only on request
     if(reduce) player.querySelector('.screen').addEventListener('click',function(){vids.forEach(function(v){v.paused?v.play():v.pause()})});
