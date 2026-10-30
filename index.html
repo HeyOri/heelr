@@ -352,6 +352,12 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
 .seg button:hover{color:var(--ink)}
 .seg button[aria-selected="true"],.seg button[aria-pressed="true"]{background:var(--deep);color:var(--deep-ink)}
 .seg.pens button[aria-pressed="true"]{background:var(--accent);color:#171614}
+.watch .wrap{padding-block:0 104px}
+.film{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#1F2A24;box-shadow:0 30px 60px -30px rgba(31,42,36,.45)}
+.film video{width:100%;height:100%;display:block;object-fit:contain;background:#1F2A24}
+.film-play{position:absolute;inset:0;margin:auto;width:max-content;height:max-content;display:inline-flex;align-items:center;gap:12px;padding:16px 26px 16px 20px;border:0;border-radius:999px;background:#F7F5F1;color:#1F2A24;font:600 17px/1 var(--body);cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .2s ease}
+.film-play:hover{transform:scale(1.04)}
+.film.playing .film-play{display:none}
 .screen{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#2a2a24}
 .screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
 .screen video.on{opacity:1}
@@ -366,6 +372,9 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
   .seg{display:flex}
   .seg button{flex:1 1 0;padding:0 8px;font-size:13px}
   .screen{aspect-ratio:4/3;border-radius:12px}
+  .watch .wrap{padding-block:0 64px}
+  .film{border-radius:12px}
+  .film-play{padding:12px 20px 12px 16px;font-size:15px}
   .final{right:10px;bottom:10px;padding:8px 10px}
   .final b{font-size:20px}
 }
@@ -483,7 +492,7 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
         <a class="btn light" href="#contact">Book a demo flight
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </a>
-        <a class="btn line" href="#how">How it works</a>
+        <a class="btn line" href="#watch" data-play-demo>Watch the demo</a>
       </div>
     </div>
   </section>
@@ -534,6 +543,21 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
           <div class="final"><span>Final count</span><b id="final">118 head</b></div>
         </div>
         <p class="explain" id="explain" aria-live="polite">The model outlines every animal, finds the fences on both sides of the pen, and tracks each animal by ID so none is counted twice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="watch" id="watch" aria-labelledby="w-h">
+    <div class="wrap">
+      <div class="show-head">
+        <div><p class="kicker rise">75 seconds</p><h2 id="w-h" class="rise">Watch the demo.</h2></div>
+        <p class="rise">The real dashboard on a real flight: the count, the map, the AI in the drone video, the audit trail and the autonomous flight plan.</p>
+      </div>
+      <div class="film rise">
+        <video id="demo-video" playsinline preload="none" poster="assets/video/demo-poster.webp" aria-label="Heelr product demo, 75 seconds, with captions">
+          <source src="assets/video/demo.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="film-play" aria-label="Play the demo"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"></path></svg><span>Watch the demo</span></button>
       </div>
     </div>
   </section>
@@ -847,6 +871,18 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
       stage.textContent=names[i]; dots.forEach(function(d,k){d.classList.toggle('on',k===i)});
     });
   }
+
+  /* ---------- Demo video: nothing downloads until someone presses play ---------- */
+  (function(){
+    var v=document.getElementById('demo-video'); if(!v)return;
+    var box=v.parentNode, btn=box.querySelector('.film-play');
+    function play(){ box.classList.add('playing'); v.controls=true; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+    btn.addEventListener('click',play);
+    v.addEventListener('play',function(){box.classList.add('playing'); v.controls=true;});
+    [].forEach.call(document.querySelectorAll('[data-play-demo]'),function(a){a.addEventListener('click',function(e){
+      e.preventDefault(); box.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); play();
+    })});
+  })();
 
   /* ---------- Savings calculator: only uses what the visitor types ---------- */
   (function(){
