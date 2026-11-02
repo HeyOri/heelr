@@ -858,6 +858,8 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
 (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('js');
+  // GoatCounter events: counts actions only, no cookies, nothing personal
+  function track(name){ try{ if(window.goatcounter&&goatcounter.count) goatcounter.count({path:name,title:name,event:true}); }catch(e){} }
 
   /* ---------- Hero video: show the still frame for reduced motion ---------- */
   var hv=document.getElementById('hero-video');
@@ -872,13 +874,18 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
     });
   }
 
+  [].forEach.call(document.querySelectorAll('a[href="#contact"]'),function(a){a.addEventListener('click',function(){track('book-a-demo-click')})});
+
   /* ---------- Demo video: nothing downloads until someone presses play ---------- */
   (function(){
     var v=document.getElementById('demo-video'); if(!v)return;
     var box=v.parentNode, btn=box.querySelector('.film-play');
     function play(){ box.classList.add('playing'); v.controls=true; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
     btn.addEventListener('click',play);
-    v.addEventListener('play',function(){box.classList.add('playing'); v.controls=true;});
+    var played=false, half=false;
+    v.addEventListener('play',function(){box.classList.add('playing'); v.controls=true; if(!played){played=true; track('demo-video-play');}});
+    v.addEventListener('timeupdate',function(){ if(!half&&v.duration&&v.currentTime>v.duration/2){half=true; track('demo-video-watched-half');} });
+    v.addEventListener('ended',function(){ track('demo-video-watched-to-end'); });
     [].forEach.call(document.querySelectorAll('[data-play-demo]'),function(a){a.addEventListener('click',function(e){
       e.preventDefault(); box.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); play();
     })});
@@ -1012,7 +1019,7 @@ mark.confirm{background:#FDE7C9;color:#7A3F0A;border-radius:4px;padding:1px 4px;
         name:val('name'),company:val('company')||'-',email:val('email'),phone:val('phone'),message:val('message'),botcheck:''})})
     .then(function(r){return r.json()}).then(function(j){
       if(!j.success) throw j;
-      form.reset(); say('Thanks, your message is in. We\u2019ll be in touch soon.');
+      form.reset(); say('Thanks, your message is in. We\u2019ll be in touch soon.'); track('demo-request-sent');
     }).catch(function(){ say('Your message didn\u2019t send. Please try again.',true); })
     .then(function(){sendBtn.disabled=false});
   });
